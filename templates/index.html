@@ -1,9 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Flask Skeleton</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT Clone</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-<h1>Hello, Flask Skeleton!</h1>
+    <div class="container">
+        <div id="chat-box" class="chat-box">
+            <!-- 对话内容将动态填充 -->
+        </div>
+        <input id="chat-input" type="text" placeholder="Type your message here...">
+        <button id="send-button">Send</button>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
