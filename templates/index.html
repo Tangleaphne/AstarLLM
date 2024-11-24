@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatGPT Clone</title>
+    <title>Transaction Audit</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
@@ -11,8 +11,15 @@
         <div id="chat-box" class="chat-box">
             <!-- 消息记录会动态插入到这里 -->
         </div>
-        <input id="chat-input" type="text" placeholder="Type your message here...">
-        <button id="send-button">Send</button>
+        <div class="form">
+            <div class="input-group">
+                <input id="recipient" type="text" placeholder="Recipient Address (e.g., 0x...)" />
+                <input id="token" type="text" placeholder="Token (e.g., ETH)" />
+                <input id="amount" type="number" placeholder="Amount (e.g., 1000)" />
+            </div>
+            <input id="intention" type="text" placeholder="Your Intention (e.g., investment purpose)" />
+            <button id="send-button">Send</button>
+        </div>
     </div>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
