@@ -21,6 +21,31 @@ body {
     padding: 10px;
     margin-bottom: 10px;
     background: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 用户消息气泡（靠右对齐） */
+.message.user {
+    align-self: flex-end;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 15px 15px 0 15px;
+    max-width: 60%;
+    word-wrap: break-word;
+}
+
+/* AI 消息气泡（靠左对齐） */
+.message.ai {
+    align-self: flex-start;
+    background-color: #e5e5e5;
+    color: black;
+    padding: 10px 15px;
+    border-radius: 15px 15px 15px 0;
+    max-width: 60%;
+    word-wrap: break-word;
 }
 
 input {
