@@ -3,22 +3,21 @@ document.getElementById("send-button").addEventListener("click", function () {
     const token = document.getElementById("token").value.trim();
     const amount = document.getElementById("amount").value.trim();
     const intention = document.getElementById("intention").value.trim();
-    const chatBox = document.getElementById("chat-box");
+    const warningMessage = document.getElementById("warning-message"); // 获取专门的警告信息区域
 
     // 检查输入框是否为空
     if (!recipient || !token || !amount || !intention) {
-        const warningMessage = document.createElement("div");
-        warningMessage.className = "message ai"; // 让提示也以气泡形式显示
+        // 显示警告信息，而非使用聊天气泡
         warningMessage.innerText = "All fields must be filled out before sending. Please complete the form.";
-        chatBox.appendChild(warningMessage);
-
-        // 自动滚动到底部
-        chatBox.scrollTop = chatBox.scrollHeight;
-
-        return; // 停止发送
+        warningMessage.style.display = "block"; // 显示警告信息
+        return; // 停止后续逻辑
     }
 
-    // 显示用户输入
+    // 隐藏警告信息（当所有字段都填写时）
+    warningMessage.style.display = "none";
+
+    // 显示用户输入（聊天气泡形式）
+    const chatBox = document.getElementById("chat-box");
     const userMessage = document.createElement("div");
     userMessage.className = "message user";
     userMessage.innerText = `Recipient: ${recipient}, Token: ${token}, Amount: ${amount}, Intention: ${intention}`;
@@ -30,7 +29,7 @@ document.getElementById("send-button").addEventListener("click", function () {
     document.getElementById("amount").value = "";
     document.getElementById("intention").value = "";
 
-    // 发送请求到后端
+    // 模拟发送请求到后端
     fetch("/get_response", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -38,7 +37,7 @@ document.getElementById("send-button").addEventListener("click", function () {
     })
         .then((response) => response.json())
         .then((data) => {
-            // 显示 AI 的反馈
+            // 显示 AI 的反馈（聊天气泡形式）
             const aiMessage = document.createElement("div");
             aiMessage.className = "message ai";
             aiMessage.innerText = data.reply;
