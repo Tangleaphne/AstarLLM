@@ -4,7 +4,7 @@ from web3 import Web3
 app = Flask(__name__)
 
 # 配置以太坊节点连接（这里使用 Infura 示例）
-INFURA_URL = "https://mainnet.infura.io/v3/a2f188a2d48c4422a2d84c08231d5db9"
+INFURA_URL = "https://mainnet.infura.io/v3/key" # 此处请替换自己的infura id
 web3 = Web3(Web3.HTTPProvider(INFURA_URL))
 
 @app.route("/")
