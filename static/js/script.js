@@ -4,6 +4,7 @@ document.getElementById("send-button").addEventListener("click", function () {
     const amount = document.getElementById("amount").value.trim();
     const intention = document.getElementById("intention").value.trim();
     const warningMessage = document.getElementById("warning-message"); // 获取专门的警告信息区域
+    const chatBox = document.getElementById("chat-box"); // 聊天记录框
 
     // 检查输入框是否为空
     if (!recipient || !token || !amount || !intention) {
@@ -17,19 +18,37 @@ document.getElementById("send-button").addEventListener("click", function () {
     warningMessage.style.display = "none";
 
     // 显示用户输入（聊天气泡形式）
-    const chatBox = document.getElementById("chat-box");
     const userMessage = document.createElement("div");
     userMessage.className = "message user";
     userMessage.innerText = `Recipient: ${recipient}, Token: ${token}, Amount: ${amount}, Intention: ${intention}`;
     chatBox.appendChild(userMessage);
 
-    // 清空输入框
-    document.getElementById("recipient").value = "";
-    document.getElementById("token").value = "";
-    document.getElementById("amount").value = "";
-    document.getElementById("intention").value = "";
+    // 调用新功能：获取合约字节码
+    fetch("/get_contract_code", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ recipient }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            // 显示返回的合约字节码或错误消息
+            const contractMessage = document.createElement("div");
+            contractMessage.className = "message ai";
+            contractMessage.innerText = data.code || `Error fetching contract code: ${data.error}`;
+            chatBox.appendChild(contractMessage);
 
-    // 模拟发送请求到后端
+            // 自动滚动到底部
+            chatBox.scrollTop = chatBox.scrollHeight;
+        })
+        .catch((error) => {
+            // 显示错误信息
+            const errorMessage = document.createElement("div");
+            errorMessage.className = "message ai";
+            errorMessage.innerText = `Error: ${error.message}`;
+            chatBox.appendChild(errorMessage);
+        });
+
+    // 模拟发送请求到后端（保留原有功能）
     fetch("/get_response", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
