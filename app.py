@@ -1,6 +1,11 @@
 from flask import Flask, render_template, request, jsonify
 from web3 import Web3
 import requests
+from dotenv import load_dotenv
+import os
+
+# 加载 .env 文件
+load_dotenv(dotenv_path=".env")
 
 app = Flask(__name__)
 
@@ -10,7 +15,9 @@ web3 = Web3(Web3.HTTPProvider(INFURA_URL))
 
 # GPT-4o-mini API 配置
 GPT_API_URL = "https://api.openai.com/v1/chat/completions"
-GPT_API_KEY = "YOUR_OPENAI_API_KEY"  # 替换为你的 API Key
+GPT_API_KEY = os.getenv("GPT_API_KEY")
+# print("Loaded API Key:", GPT_API_KEY)
+
 
 @app.route("/")
 def index():
@@ -59,6 +66,7 @@ def get_response():
     try:
         response = requests.post(GPT_API_URL, headers=headers, json=payload)
         response_data = response.json()
+        # print("Full GPT Response:", response_data)  # 调试用
         gpt_reply = response_data.get("choices", [{}])[0].get("message", {}).get("content", "No response from the model.")
     except Exception as e:
         gpt_reply = f"Error calling GPT API: {str(e)}"
