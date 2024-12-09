@@ -86,13 +86,35 @@ def get_contract_code():
         return jsonify({"error": "Invalid Ethereum address."}), 400
 
     try:
-        bytecode = web3.eth.get_code(recipient).hex()
-        if bytecode == "0x":
-            return jsonify({"error": "No contract found at the specified address."}), 404
+        # 调用 Etherscan API 获取源码
+        ETHERSCAN_API_URL = "https://api.etherscan.io/api"
+        ETHERSCAN_API_KEY = os.getenv("ETHERSCAN_API_KEY")  # 从环境变量中获取 API 密钥
+        print("Loaded API Key:", ETHERSCAN_API_KEY)
 
-        return jsonify({"code": bytecode})
+        params = {
+            "module": "contract",
+            "action": "getsourcecode",
+            "address": recipient,
+            "apikey": ETHERSCAN_API_KEY,
+        }
+
+        # 调用 Etherscan API
+        response = requests.get(ETHERSCAN_API_URL, params=params)
+        response_data = response.json()
+
+        # 检查 API 返回的状态
+        if response_data["status"] != "1":
+            return jsonify({"error": response_data.get("result", "Error fetching contract source.")}), 400
+
+        # 获取合约源码
+        source_code = response_data["result"][0].get("SourceCode", "No source code found.")
+        if not source_code:
+            return jsonify({"error": "No source code found at the specified address."}), 404
+
+        return jsonify({"source": source_code})  # 返回源码
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 if __name__ == "__main__":
     app.run(debug=True)
