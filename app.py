@@ -37,8 +37,8 @@ def get_response():
 
     # 模拟获取智能合约字节码
     try:
-        bytecode = web3.eth.get_code(recipient).hex()
-        if bytecode == "0x":
+        code = web3.eth.get_code(recipient).hex()
+        if code == "0x":
             return jsonify({"reply": "No contract found at the specified address."})
     except Exception as e:
         return jsonify({"reply": f"Error fetching contract code: {str(e)}"})
@@ -46,7 +46,7 @@ def get_response():
     # 构造 GPT 请求的输入内容
     gpt_prompt = (
         f"The recipient address is {recipient}. The token involved is {token}, "
-        f"the amount is {amount}, and the user intention is '{intention}'. The contract bytecode is:\n\n{bytecode}\n\n"
+        f"the amount is {amount}, and the user intention is '{intention}'. The contract source code is:\n\n{code}\n\n"
         "Please analyze the contract for risks and provide suggestions."
     )
 

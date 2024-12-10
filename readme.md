@@ -11,3 +11,8 @@ add funtion: now page can fetch smart contract bytecode from recipient. informat
 ## 12.9 - ziling
 add function: now this page can connect with gpt model. audit keeper will answer bytecode of addr and gpt response seperately but gpt will take time for several seconds.
 ![alt text](img/image-3.png)
+
+## 12.10 - ziling
+add function: now replace bytecode with source code and prompts, but response from gpt is not satisfying.
+![alt text](img/image-4.png)
+![alt text](img/image-4.png)
