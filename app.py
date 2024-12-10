@@ -10,7 +10,7 @@ load_dotenv(dotenv_path=".env")
 app = Flask(__name__)
 
 # 配置以太坊节点连接（这里使用 Infura 示例）
-INFURA_URL = "https://mainnet.infura.io/v3/a2f188a2d48c4422a2d84c08231d5db9"
+INFURA_URL = os.getenv("INFURA_URL")
 web3 = Web3(Web3.HTTPProvider(INFURA_URL))
 
 # GPT-4o-mini API 配置
