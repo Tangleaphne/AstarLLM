@@ -18,7 +18,6 @@ GPT_API_URL = "https://api.openai.com/v1/chat/completions"
 GPT_API_KEY = os.getenv("GPT_API_KEY")
 # print("Loaded API Key:", GPT_API_KEY)
 
-
 @app.route("/")
 def index():
     return render_template("index.html")
