@@ -17,6 +17,7 @@ web3 = Web3(Web3.HTTPProvider(INFURA_URL))
 GPT_API_URL = "https://api.openai.com/v1/chat/completions"
 GPT_API_KEY = os.getenv("GPT_API_KEY")
 # print("Loaded API Key:", GPT_API_KEY)
+SHARE_DIR = "./share"
 
 @app.route("/")
 def index():
@@ -109,6 +110,11 @@ def get_contract_code():
         source_code = response_data["result"][0].get("SourceCode", "No source code found.")
         if not source_code:
             return jsonify({"error": "No source code found at the specified address."}), 404
+        
+        # 保存源码到本地 share 目录
+        file_path = os.path.join(SHARE_DIR, f"{recipient}.sol")
+        with open(file_path, "w", encoding="utf-8") as file:
+            file.write(source_code)
 
         return jsonify({"source": source_code})  # 返回源码
     except Exception as e:
