@@ -16,3 +16,10 @@ add function: now this page can connect with gpt model. audit keeper will answer
 add function: now replace bytecode with source code and prompts, but response from gpt is not satisfying.
 ![alt text](img/image-4.png)
 ![alt text](img/image-5.png)
+
+## 12.27 - ziling
+add function: connect with local docker, using slither to detect vulnerabilities and save output as md. 
+Prerequisite: local docker desktop and slither, container using same version of solc with the smart contract.
+### sample:
+![alt text](img/image-7.png)
+![alt text](img/image-6.png)
