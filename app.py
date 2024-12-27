@@ -3,6 +3,7 @@ from web3 import Web3
 import requests
 from dotenv import load_dotenv
 import os
+import subprocess  # Import subprocess for running Docker commands
 
 # 加载 .env 文件
 load_dotenv(dotenv_path=".env")
@@ -115,6 +116,19 @@ def get_contract_code():
         file_path = os.path.join(SHARE_DIR, f"{recipient}.sol")
         with open(file_path, "w", encoding="utf-8") as file:
             file.write(source_code)
+            
+        # NEW: 调用 Docker 进行安全检测
+        CONTAINER_ID = os.getenv("CONTAINER_ID")
+        analysis_result_path = os.path.join(SHARE_DIR, f"{recipient}_analysis.md")  # NEW: Define the output path
+        docker_command = (
+            f'docker exec -it {CONTAINER_ID} /bin/bash -c "slither /share/{recipient}.sol --checklist > /share/{recipient}_analysis.md"'
+        )
+
+        try:
+            subprocess.run(docker_command, shell=True, check=True)  # NEW: Run Docker command
+            print(f"Analysis completed and saved to {analysis_result_path}")  # NEW: Log the result path
+        except subprocess.CalledProcessError as e:  # NEW: Handle Docker errors
+            print(f"Error running Docker command: {e.stderr}")  # NEW: Log the error
 
         return jsonify({"source": source_code})  # 返回源码
     except Exception as e:
