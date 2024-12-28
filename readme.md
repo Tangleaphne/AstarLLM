@@ -23,3 +23,7 @@ Prerequisite: local docker desktop and slither, container using same version of 
 ### sample:
 ![alt text](img/image-7.png)
 ![alt text](img/image-6.png)
+
+## 12.28 - ziling
+add function: update solc version according to the sol pragma version in the file downloaded.
+![alt text](img/image-8.png)
