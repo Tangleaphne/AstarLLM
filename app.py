@@ -3,6 +3,7 @@ from web3 import Web3
 import requests
 from dotenv import load_dotenv
 import os
+import re
 import subprocess  # Import subprocess for running Docker commands
 
 # 加载 .env 文件
@@ -117,7 +118,15 @@ def get_contract_code():
         with open(file_path, "w", encoding="utf-8") as file:
             file.write(source_code)
             
-        # NEW: 调用 Docker 进行安全检测
+        # 提取 Solidity 版本
+        version = extract_solidity_version(source_code)
+        print(f"Extracted Solidity version: {version}")  # 输出到终端
+        
+        # **NEW: 更新 Docker 容器内的 solc 版本**
+        CONTAINER_ID = os.getenv("CONTAINER_ID")
+        update_solc_version_in_docker(CONTAINER_ID, version)  # NEW: 更新 solc 版本
+        
+        # 调用 Docker 进行安全检测
         CONTAINER_ID = os.getenv("CONTAINER_ID")
         analysis_result_path = os.path.join(SHARE_DIR, f"{recipient}_analysis.md")  # NEW: Define the output path
         docker_command = (
@@ -125,14 +134,43 @@ def get_contract_code():
         )
 
         try:
-            subprocess.run(docker_command, shell=True, check=True)  # NEW: Run Docker command
-            print(f"Analysis completed and saved to {analysis_result_path}")  # NEW: Log the result path
-        except subprocess.CalledProcessError as e:  # NEW: Handle Docker errors
-            print(f"Error running Docker command: {e.stderr}")  # NEW: Log the error
+            subprocess.run(docker_command, shell=True, check=True)  # Run Docker command
+            print(f"Analysis completed and saved to {analysis_result_path}")  # Log the result path
+        except subprocess.CalledProcessError as e:  # Handle Docker errors
+            print(f"Error running Docker command: {e.stderr}")  # Log the error
 
         return jsonify({"source": source_code})  # 返回源码
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+# 提取 Solidity 版本的函数
+def extract_solidity_version(source_code):
+    """
+    从 Solidity 源代码中提取版本号
+    """
+    match = re.search(r"pragma\s+solidity\s+([^\s;]+);", source_code)  # 匹配 `pragma solidity ^0.8.0;` 格式
+    if match:
+        return match.group(1)  # 返回匹配到的版本号，例如 "^0.8.0"
+    return "Unknown"  # 如果未匹配到版本号，返回 "Unknown"
+
+# 更新 Docker 容器内 solc 版本的函数
+def update_solc_version_in_docker(container_id, version):
+    #更新 Docker 容器内的 solc 版本
+
+    if version == "Unknown":
+        print("Solidity version not found, skipping update.")
+        return
+    
+    version_number = version.replace("^", "").replace("~", "")
+    # Install and switch version
+    docker_command_install_solc = (f'docker exec -it {container_id} solc-select install {version_number}'  )
+    docker_command_use_solc = (f'docker exec -it {container_id} solc-select use {version_number}')
+    try:
+        subprocess.run(docker_command_install_solc, shell=True, check=True)
+        subprocess.run(docker_command_use_solc, shell=True, check=True)
+        print(f"Updated solc version in Docker to {version_number}")  # NEW: Log success
+    except subprocess.CalledProcessError as e:
+        print(f"Error updating solc version in Docker: {e.stderr}")  # NEW: Log errors
 
 
 if __name__ == "__main__":
