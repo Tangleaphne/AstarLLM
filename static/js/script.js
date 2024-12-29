@@ -23,32 +23,6 @@ document.getElementById("send-button").addEventListener("click", function () {
     userMessage.innerText = `Recipient: ${recipient}, Token: ${token}, Amount: ${amount}, Intention: ${intention}`;
     chatBox.appendChild(userMessage);
 
-    // // 调用新功能：获取合约字节码
-    // fetch("/get_contract_code", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({ recipient }),
-    // })
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //         // 显示返回的合约字节码或错误消息
-    //         const contractMessage = document.createElement("div");
-    //         contractMessage.className = "message ai";
-    //         contractMessage.innerText = data.code || `Error fetching contract code: ${data.error}`;
-    //         chatBox.appendChild(contractMessage);
-
-    //         // 自动滚动到底部
-    //         chatBox.scrollTop = chatBox.scrollHeight;
-    //     })
-    //     .catch((error) => {
-    //         // 显示错误信息
-    //         const errorMessage = document.createElement("div");
-    //         errorMessage.className = "message ai";
-    //         errorMessage.innerText = `Error: ${error.message}`;
-    //         chatBox.appendChild(errorMessage);
-    //     });
-
-
     fetch("/get_contract_code", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
