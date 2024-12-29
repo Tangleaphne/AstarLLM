@@ -27,3 +27,7 @@ Prerequisite: local docker desktop and slither, container using same version of 
 ## 12.28 - ziling
 add function: update solc version according to the sol pragma version in the file downloaded.
 ![alt text](img/image-8.png)
+
+## 12.29 - ziling
+add function: improved prompts and parameters sent to gpt and get a pretty satisfying result. Now prototype ver1.0 would be done.
+Response can be found - **Prototype ver1.0 Analyzing test**
