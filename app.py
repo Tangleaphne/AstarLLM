@@ -90,6 +90,73 @@ def get_response():
     return jsonify({"reply": gpt_reply})
 
 
+# @app.route("/get_contract_code", methods=["POST"])
+# def get_contract_code():
+#     data = request.json
+#     recipient = data.get("recipient", "").strip()
+
+#     if not recipient:
+#         return jsonify({"error": "Recipient address is required."}), 400
+
+#     if not Web3.is_address(recipient):
+#         return jsonify({"error": "Invalid Ethereum address."}), 400
+
+#     try:
+#         # 调用 Etherscan API 获取源码
+#         ETHERSCAN_API_URL = "https://api.etherscan.io/api"
+#         ETHERSCAN_API_KEY = os.getenv("ETHERSCAN_API_KEY")  # 从环境变量中获取 API 密钥
+#         print("Loaded API Key:", ETHERSCAN_API_KEY)
+
+#         params = {
+#             "module": "contract",
+#             "action": "getsourcecode",
+#             "address": recipient,
+#             "apikey": ETHERSCAN_API_KEY,
+#         }
+
+#         # 调用 Etherscan API
+#         response = requests.get(ETHERSCAN_API_URL, params=params)
+#         response_data = response.json()
+
+#         # 检查 API 返回的状态
+#         if response_data["status"] != "1":
+#             return jsonify({"error": response_data.get("result", "Error fetching contract source.")}), 400
+
+#         # 获取合约源码
+#         source_code = response_data["result"][0].get("SourceCode", "No source code found.")
+#         if not source_code:
+#             return jsonify({"error": "No source code found at the specified address."}), 404
+        
+#         # 保存源码到本地 share 目录
+#         file_path = os.path.join(SHARE_DIR, f"{recipient}.sol")
+#         with open(file_path, "w", encoding="utf-8") as file:
+#             file.write(source_code)
+            
+#         # 提取 Solidity 版本
+#         version = extract_solidity_version(source_code)
+#         print(f"Extracted Solidity version: {version}")  # 输出到终端
+        
+#         # 更新 Docker 容器内的 solc 版本
+#         CONTAINER_ID = os.getenv("CONTAINER_ID")
+#         update_solc_version_in_docker(CONTAINER_ID, version)  # 更新 solc 版本
+        
+#         # 调用 Docker 进行安全检测
+#         CONTAINER_ID = os.getenv("CONTAINER_ID")
+#         analysis_result_path = os.path.join(SHARE_DIR, f"{recipient}_analysis.md")  # Define the output path
+#         docker_command = (
+#             f'docker exec -it {CONTAINER_ID} /bin/bash -c "slither /share/{recipient}.sol --checklist > /share/{recipient}_analysis.md"'
+#         )
+
+#         try:
+#             subprocess.run(docker_command, shell=True, check=True)  # Run Docker command
+#             print(f"Analysis completed and saved to {analysis_result_path}")  # Log the result path
+#         except subprocess.CalledProcessError as e:  # Handle Docker errors
+#             print(f"Error running Docker command: {e.stderr}")  # Log the error
+
+#         return jsonify({"source": source_code})  # 返回源码
+#     except Exception as e:
+#         return jsonify({"error": str(e)}), 500
+
 @app.route("/get_contract_code", methods=["POST"])
 def get_contract_code():
     data = request.json
@@ -126,36 +193,40 @@ def get_contract_code():
         source_code = response_data["result"][0].get("SourceCode", "No source code found.")
         if not source_code:
             return jsonify({"error": "No source code found at the specified address."}), 404
-        
-        # 保存源码到本地 share 目录
-        file_path = os.path.join(SHARE_DIR, f"{recipient}.sol")
-        with open(file_path, "w", encoding="utf-8") as file:
+
+        # 在 share 下为该地址创建目录
+        address_dir = os.path.join(SHARE_DIR, recipient)
+        os.makedirs(address_dir, exist_ok=True)
+
+        # 保存源码到对应目录
+        source_code_path = os.path.join(address_dir, f"{recipient}.sol")
+        with open(source_code_path, "w", encoding="utf-8") as file:
             file.write(source_code)
-            
+
         # 提取 Solidity 版本
         version = extract_solidity_version(source_code)
         print(f"Extracted Solidity version: {version}")  # 输出到终端
-        
+
         # 更新 Docker 容器内的 solc 版本
         CONTAINER_ID = os.getenv("CONTAINER_ID")
         update_solc_version_in_docker(CONTAINER_ID, version)  # 更新 solc 版本
-        
+
         # 调用 Docker 进行安全检测
-        CONTAINER_ID = os.getenv("CONTAINER_ID")
-        analysis_result_path = os.path.join(SHARE_DIR, f"{recipient}_analysis.md")  # Define the output path
+        analysis_result_path = os.path.join(address_dir, "analysis.md")  # 分析结果保存路径
         docker_command = (
-            f'docker exec -it {CONTAINER_ID} /bin/bash -c "slither /share/{recipient}.sol --checklist > /share/{recipient}_analysis.md"'
+            f'docker exec -it {CONTAINER_ID} /bin/bash -c "slither /share/{recipient}/{recipient}.sol --checklist > /share/{recipient}/analysis.md"'
         )
 
         try:
-            subprocess.run(docker_command, shell=True, check=True)  # Run Docker command
-            print(f"Analysis completed and saved to {analysis_result_path}")  # Log the result path
-        except subprocess.CalledProcessError as e:  # Handle Docker errors
-            print(f"Error running Docker command: {e.stderr}")  # Log the error
+            subprocess.run(docker_command, shell=True, check=True)  # 运行 Docker 命令
+            print(f"Analysis completed and saved to {analysis_result_path}")  # 记录分析结果路径
+        except subprocess.CalledProcessError as e:  # 处理 Docker 错误
+            print(f"Error running Docker command: {e.stderr}")  # 输出错误日志
 
         return jsonify({"source": source_code})  # 返回源码
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 # 提取 Solidity 版本的函数
 def extract_solidity_version(source_code):
