@@ -32,11 +32,16 @@ document.getElementById("send-button").addEventListener("click", function () {
         .then((data) => {
             const contractMessage = document.createElement("div");
             contractMessage.className = "message ai";
-            if (data.source) {
-                contractMessage.innerText = `Contract Source Code:\n${data.source}`;
+    
+            if (data.analysis_path) {
+                // 成功获取源码并保存，显示提示信息
+                contractMessage.innerText = `Successfully fetch Source Code, Analysis File saved at: ${data.analysis_path}`;
             } else {
-                contractMessage.innerText = `Error fetching source code: ${data.error}`;
+                // 处理错误信息
+                contractMessage.innerText = `Error fetching Code: ${data.error}`;
             }
+    
+            // 将提示信息添加到聊天框
             chatBox.appendChild(contractMessage);
     
             // 自动滚动到底部
@@ -48,7 +53,7 @@ document.getElementById("send-button").addEventListener("click", function () {
             errorMessage.innerText = `Error: ${error.message}`;
             chatBox.appendChild(errorMessage);
         });
-
+    
         
     // 模拟发送请求到后端（保留原有功能）
     fetch("/get_response", {
