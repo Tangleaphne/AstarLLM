@@ -20,80 +20,75 @@ load_config()  # 加载配置
 def index():
     return render_template("index.html")
 
-@app.route("/get_contract_code", methods=["POST"])
-def get_contract_code():
+@app.route("/analyze_and_advise", methods=["POST"])
+def analyze_and_advise():
     data = request.json
     recipient = data.get("recipient", "").strip()
+    token = data.get("token","").strip()
+    amount = data.get("amount","").strip()
+    intention = data.get("intention","").strip()
 
     if not recipient:
         return jsonify({"error": "Recipient address is required."}), 400
 
     try:
-        # 获取合约代码并分析
+        # Step 1: 获取合约代码并分析
         source_code, address_dir = fetch_contract_code(recipient)
         analysis_path = save_contract_analysis(address_dir, recipient)
 
-        # 返回成功提示信息和分析文件路径
+        # Step 2: 读取 Slither 分析内容
+        with open(analysis_path, "r", encoding="utf-8") as analysis_file:
+            slither_content = analysis_file.read()
+
+        # Step 3: 构造 GPT 请求
+        gpt_prompt_security = (
+            f"Provide a concise security assessment for a non-technical user based on the following contract analysis. "
+            f"The recipient address is {recipient}. The user intends to invest {amount} {token} with the goal of '{intention}'.\n\n"
+            f"Analysis:\n{slither_content}\n\n"
+            f"Instructions:\n"
+            f"1. Start by addressing the user's intention and whether it aligns with the contract's functionality.\n"
+            f"2. Highlight any vulnerabilities categorized as 'high' by Slither and explain their potential impact on the investment, "
+            f"without delving into technical details.\n"
+            f"3. Ignore vulnerabilities ranked as 'medium', 'low', or 'informational'.\n"
+            f"4. Conclude with your personal opinion on whether the user should proceed with the investment, clearly stating reasons."
+        )
+
+        gpt_prompt_functionality = (
+            f"Explain the functionality of this smart contract for a non-technical user. Focus on:\n"
+            f"1. Whether the contract can accept {token} for investment.\n"
+            f"2. How funds will flow if invested, including where they will go and how they might be used.\n"
+            f"3. Any fairness issues, such as uneven fund distribution or biased logic.\n"
+            f"4. Whether the contract shows signs of malicious intent, like unusually high fees or exploitable features.\n\n"
+            f"Contract Source Code:\n{source_code}"
+        )
+
+
+        gpt_responses = []
+        for prompt in [gpt_prompt_security, gpt_prompt_functionality]:
+            headers = {
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {os.getenv('GPT_API_KEY')}",
+            }
+            payload = {
+                "model": "gpt-4o-mini",
+                "messages": [
+                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "user", "content": prompt}
+                ]
+            }
+            response = requests.post(os.getenv("GPT_API_URL"), headers=headers, json=payload)
+            gpt_responses.append(response.json().get("choices", [{}])[0].get("message", {}).get("content", "No response."))
+
+        # Step 4: 返回综合结果
         return jsonify({
-            "message": "Contract source code fetched and saved successfully.",
-            "analysis_path": analysis_path,
+            "security_assessment": gpt_responses[0],
+            "functionality_analysis": gpt_responses[1],
+            "analysis_path": analysis_path
         })
+
     except Exception as e:
+        logger.error(f"Error during analysis and advice: {str(e)}")
         return jsonify({"error": str(e)}), 500
-
-
-@app.route("/get_response", methods=["POST"])
-def get_response():
-    data = request.json
-    recipient = data.get("recipient")
-    token = data.get("token")
-    amount = data.get("amount")
-    intention = data.get("intention")
-
-    if not all([recipient, token, amount, intention]):
-        return jsonify({"reply": "Please provide all required fields: Recipient, Token, Amount, Intention."})
-
-    # 定义文件路径
-    share_dir = os.getenv("SHARE_DIR")
-    source_code_path = os.path.join(share_dir, recipient, "SourceCode.sol")
-    analysis_path = os.path.join(share_dir, recipient, "analysis.md")
-
-    # 检查文件是否存在
-    if not os.path.exists(source_code_path):
-        return jsonify({"reply": f"Source code for recipient {recipient} not found. Please fetch it first."})
-    if not os.path.exists(analysis_path):
-        return jsonify({"reply": f"Slither analysis for recipient {recipient} not found. Please analyze it first."})
-
-    # 构造简化后的 GPT 提示
-    gpt_prompt = (
-        f"You are an assistant providing investment advice to non-technical users. "
-        f"The recipient address is {recipient}, and the user intends to invest {amount} {token}. "
-        f"Based on the contract analysis report:\n\n"
-        f"{open(analysis_path, 'r', encoding='utf-8').read()}\n\n"
-        "Please provide a clear and concise investment suggestion. Avoid technical jargon and focus on whether "
-        "the user should proceed with the investment, highlighting key risks or reasons."
-    )
-
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {os.getenv('GPT_API_KEY')}",
-    }
-    payload = {
-        "model": "gpt-4o-mini",
-        "messages": [
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": gpt_prompt}
-        ]
-    }
-
-    try:
-        response = requests.post(os.getenv("GPT_API_URL"), headers=headers, json=payload)
-        response_data = response.json()
-        gpt_reply = response_data.get("choices", [{}])[0].get("message", {}).get("content", "No response from the model.")
-        return jsonify({"reply": gpt_reply})
-    except Exception as e:
-        logger.error(f"Error calling GPT API: {str(e)}")
-        return jsonify({"reply": f"Error calling GPT API: {str(e)}"})
 
 
 if __name__ == "__main__":
