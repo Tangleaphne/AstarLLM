@@ -12,19 +12,6 @@ def run_slither_analysis(source_code_path, recipient):
         f'docker exec -it {CONTAINER_ID} /bin/bash -c "slither {corrected_path}/SourceCode.sol --checklist > {analysis_path}"'
     )
     
-    # try:
-    #     # 隐藏 Docker 命令的输出
-    #     subprocess.run(docker_command, shell=True, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    # except subprocess.CalledProcessError as e:
-    #     raise RuntimeError(f"Slither analysis failed: {e.stderr}")
-    
-    # try:
-    # # 暂时允许输出错误信息，便于调试
-    #     subprocess.run(docker_command, shell=True, check=True, stdout=subprocess.DEVNULL)
-    # except subprocess.CalledProcessError as e:
-    #     raise RuntimeError(f"Slither analysis failed: {e.stderr or 'Unknown error occurred'}")
-    
-    
     try:
         # 不设置 check=True，让命令执行即使非零退出码也不会抛出异常
         result = subprocess.run(docker_command, shell=True, stdout=subprocess.DEVNULL)
