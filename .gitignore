@@ -1,3 +1,4 @@
 /.env
 /audit/*
 /share/*
+/__pycache__/*

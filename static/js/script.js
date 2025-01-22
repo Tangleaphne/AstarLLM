@@ -23,22 +23,30 @@ document.getElementById("send-button").addEventListener("click", function () {
     userMessage.innerText = `Recipient: ${recipient}, Token: ${token}, Amount: ${amount}, Intention: ${intention}`;
     chatBox.appendChild(userMessage);
 
-    fetch("/get_contract_code", {
+    // 调用后端新端点
+    fetch("/analyze_and_advise", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ recipient }),
+        body: JSON.stringify({ recipient, token, amount, intention }),
     })
         .then((response) => response.json())
         .then((data) => {
-            const contractMessage = document.createElement("div");
-            contractMessage.className = "message ai";
-            if (data.source) {
-                contractMessage.innerText = `Contract Source Code:\n${data.source}`;
-            } else {
-                contractMessage.innerText = `Error fetching source code: ${data.error}`;
+            if (data.error) {
+                throw new Error(data.error);
             }
-            chatBox.appendChild(contractMessage);
-    
+
+            // 显示安全性评估
+            const securityMessage = document.createElement("div");
+            securityMessage.className = "message ai";
+            securityMessage.innerText = `Security Assessment: ${data.security_assessment}`;
+            chatBox.appendChild(securityMessage);
+
+            // 显示功能解析
+            const functionalityMessage = document.createElement("div");
+            functionalityMessage.className = "message ai";
+            functionalityMessage.innerText = `Functionality Analysis: ${data.functionality_analysis}`;
+            chatBox.appendChild(functionalityMessage);
+
             // 自动滚动到底部
             chatBox.scrollTop = chatBox.scrollHeight;
         })
@@ -47,24 +55,5 @@ document.getElementById("send-button").addEventListener("click", function () {
             errorMessage.className = "message ai";
             errorMessage.innerText = `Error: ${error.message}`;
             chatBox.appendChild(errorMessage);
-        });
-
-        
-    // 模拟发送请求到后端（保留原有功能）
-    fetch("/get_response", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ recipient, token, amount, intention }),
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            // 显示 AI 的反馈（聊天气泡形式）
-            const aiMessage = document.createElement("div");
-            aiMessage.className = "message ai";
-            aiMessage.innerText = data.reply;
-            chatBox.appendChild(aiMessage);
-
-            // 自动滚动到底部
-            chatBox.scrollTop = chatBox.scrollHeight;
         });
 });
