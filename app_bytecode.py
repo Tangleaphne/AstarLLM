@@ -9,7 +9,7 @@ import logging
 import atexit
 
 # 配置日志
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG, format="%(levelname)s: %(message)s")
 
 # 加载 .env 文件
 load_dotenv(dotenv_path=".env")
@@ -31,6 +31,8 @@ if not ETHERSCAN_API_KEY:
 
 # 初始化 Flask 应用
 app = Flask(__name__)
+print(f"Checking GPT API Key: {GPT_API_KEY}")
+logging.debug(f"Loaded GPT API Key: {GPT_API_KEY}")
 
 # 配置以太坊节点连接
 web3 = Web3(Web3.HTTPProvider(INFURA_URL))
@@ -291,7 +293,7 @@ def analyze_transaction():
                 {"role": "user", "content": gpt_prompt}
             ]
         }
-
+        
         response = requests.post(GPT_API_URL, headers=headers, json=payload)
         if response.status_code != 200:
             try:
