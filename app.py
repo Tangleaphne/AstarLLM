@@ -8,6 +8,7 @@ import time
 import threading  # 用于定期刷新黑名单
 import traceback  # 添加错误日志模块
 import mysql.connector
+from collections import Counter
 
 # 加载 .env 文件
 load_dotenv(dotenv_path=".env")
@@ -124,13 +125,31 @@ def analyze_risk():
             if from_addr in TORNADO_CASH_ADDRESSES or to_addr in TORNADO_CASH_ADDRESSES:
                 risk_report["tornado_cash_involvement"] = True
 
-        # 检测短时间内大量交易
-        if len(risk_report["timestamps"]) > 10:
-            risk_report["timestamps"].sort()
-            time_diffs = [risk_report["timestamps"][i + 1] - risk_report["timestamps"][i] for i in range(len(risk_report["timestamps"]) - 1)]
-            avg_time_diff = sum(time_diffs) / len(time_diffs)
-            if avg_time_diff < 60:  # 平均时间间隔小于 60 秒
+        # # 检测短时间内大量交易
+        # if len(risk_report["timestamps"]) > 10:
+        #     risk_report["timestamps"].sort()
+        #     time_diffs = [risk_report["timestamps"][i + 1] - risk_report["timestamps"][i] for i in range(len(risk_report["timestamps"]) - 1)]
+        #     avg_time_diff = sum(time_diffs) / len(time_diffs)
+        #     if avg_time_diff < 60:  # 平均时间间隔小于 60 秒
+        #         risk_report["high_frequency_activity"] = True
+        # 获取当前时间
+        current_time = int(time.time())
+
+        # 计算过去 5 分钟（300 秒）内的交易数
+        recent_transactions = [ts for ts in risk_report["timestamps"] if current_time - ts <= 300]
+        print("In recent 5min the number of transactions this address done is:", len(recent_transactions))
+        # 统计每个时间戳的交易次数
+        timestamp_counts = Counter(risk_report["timestamps"])
+
+        # 高频交易检测逻辑
+        if len(recent_transactions) > 10:  # 方法 1
+            risk_report["high_frequency_activity"] = True
+
+        for ts, count in timestamp_counts.items():  # 方法 2
+            print("The number of tx in certain timestamp is:", count)
+            if count >= 3:  # 如果某个时间戳的交易数 ≥3
                 risk_report["high_frequency_activity"] = True
+                break  # 发现高频交易即停止
 
         # 计算风险评分
         risk_score = 0
