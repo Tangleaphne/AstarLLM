@@ -5,7 +5,9 @@ from dotenv import load_dotenv
 import os
 import re
 import time
+import threading  # 用于定期刷新黑名单
 import traceback  # 添加错误日志模块
+import mysql.connector
 
 # 加载 .env 文件
 load_dotenv(dotenv_path=".env")
@@ -16,8 +18,14 @@ app = Flask(__name__)
 ETHERSCAN_API_KEY = os.getenv("ETHERSCAN_API_KEY")
 ETHERSCAN_URL = os.getenv("ETHERSCAN_URL")
 
-print("Loaded Etherscan API Key:", ETHERSCAN_API_KEY)
-print("Loaded Etherscan URL:", ETHERSCAN_URL)
+# print("Loaded Etherscan API Key:", ETHERSCAN_API_KEY)
+# print("Loaded Etherscan URL:", ETHERSCAN_URL)
+
+# 从环境变量获取 MySQL 连接信息
+MYSQL_HOST = os.getenv("MYSQL_HOST")
+MYSQL_USER = os.getenv("MYSQL_USER")
+MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD", "")
+MYSQL_DATABASE = os.getenv("MYSQL_DATABASE")
 
 # Tornado Cash 地址列表（ETH 混币池）
 TORNADO_CASH_ADDRESSES = {
@@ -27,10 +35,43 @@ TORNADO_CASH_ADDRESSES = {
 }
 
 # 已知诈骗 / 黑名单地址（可扩展）
-BLACKLIST_ADDRESSES = {
-    "0xdAC17F958D2ee523a2206206994597C13D831ec7",
-    "0x0000000000000000000000000000000000000E33",
-}
+# BLACKLIST_ADDRESSES = {
+#     "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+#     "0x0000000000000000000000000000000000000E33",
+# }
+# 连接 MySQL 并获取黑名单地址
+def fetch_blacklist_addresses():
+    try:
+        connection = mysql.connector.connect(
+            host=MYSQL_HOST,
+            user=MYSQL_USER,
+            password=MYSQL_PASSWORD,
+            database=MYSQL_DATABASE
+        )
+        cursor = connection.cursor()
+        cursor.execute("SELECT address FROM blocked_addresses")  # 查询黑名单表
+        addresses = {row[0].lower() for row in cursor.fetchall()}  # 结果存入 set
+        cursor.close()
+        connection.close()
+        print(f"✅ Loaded {len(addresses)} blacklisted addresses from MySQL")  # 打印加载成功信息
+        return addresses
+    except Exception as e:
+        print(f"❌ ERROR: Could not load blacklist addresses: {e}")
+        return set()  # 如果出错，返回空的 set，避免影响程序
+    
+# # **定期刷新黑名单**
+# def refresh_blacklist():
+#     global BLACKLIST_ADDRESSES
+#     while True:
+#         BLACKLIST_ADDRESSES = fetch_blacklist_addresses()  # 重新加载
+#         print("🔄 Blacklist refreshed!")
+#         time.sleep(3600)  # 每 1 小时更新一次
+
+# 加载黑名单地址
+BLACKLIST_ADDRESSES = fetch_blacklist_addresses()
+
+# # 在后台启动刷新线程
+# threading.Thread(target=refresh_blacklist, daemon=True).start()
 
 @app.route("/")
 def index():
