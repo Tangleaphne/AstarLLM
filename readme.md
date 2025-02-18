@@ -1,33 +1,14 @@
-# Page frame prototype
-
-## 11.24 - zilng
-There's no actual ai, just repeating what user sent.
-![alt text](img/image-1.png)
-
-## 12.1 - ziling
-add funtion: now page can fetch smart contract bytecode from recipient. information stored in bytecode.
-![alt text](img/image-2.png)
-
-## 12.9 - ziling
-add function: now this page can connect with gpt model. audit keeper will answer bytecode of addr and gpt response seperately but gpt will take time for several seconds.
-![alt text](img/image-3.png)
-
-## 12.10 - ziling
-add function: now replace bytecode with source code and prompts, but response from gpt is not satisfying.
-![alt text](img/image-4.png)
-![alt text](img/image-5.png)
-
-## 12.27 - ziling
-add function: connect with local docker, using slither to detect vulnerabilities and save output as md. 
-Prerequisite: local docker desktop and slither, container using same version of solc with the smart contract.
-### sample:
-![alt text](img/image-7.png)
-![alt text](img/image-6.png)
-
-## 12.28 - ziling
-add function: update solc version according to the sol pragma version in the file downloaded.
-![alt text](img/image-8.png)
-
-## 12.29 - ziling
-add function: improved prompts and parameters sent to gpt and get a pretty satisfying result. Now prototype ver1.0 would be done.
-Response can be found - **Prototype ver1.0 Analyzing test**
+### How to run it   
+create .env  
+    
+```GPT_API_KEY =   
+    ETHERSCAN_API_KEY =    
+    INFURA_URL =    
+    ETHERSCAN_URL = "https://api.etherscan.io/api"   
+    # Docker 容器 ID (运行 Slither 的容器 ID)   
+    CONTAINER_ID =    
+    SHARE_DIR =    
+```   
+     
+python app.py   
+    
