@@ -56,7 +56,8 @@ def fetch_addresses(listname):
 #         BLACKLIST_ADDRESSES = fetch_blacklist_addresses()  # 重新加载
 #         print("🔄 Blacklist refreshed!")
 #         time.sleep(3600)  # 每 1 小时更新一次
-
+# 加载OFAC黑名单地址
+OFAC_ADDRESSES = fetch_addresses("ofac_addresses")
 # 加载黑名单地址
 BLACKLIST_ADDRESSES = fetch_addresses("blocked_addresses")
 # 加载 Tornado Cash 地址
@@ -92,6 +93,7 @@ def analyze_risk():
             return jsonify({"error": "No transactions found."}), 404
 
         risk_report = {
+            "ofac_interaction": False,
             "blacklist_interaction": False,
             "high_frequency_activity": False,
             "tornado_cash_involvement": False,
@@ -110,6 +112,10 @@ def analyze_risk():
                 risk_report["blacklist_interaction"] = True
                 risk_report["high_risk_addresses"].add(from_addr)
                 risk_report["high_risk_addresses"].add(to_addr)
+
+            # 检查是否与OFAC黑名单地址交互
+            if from_addr in OFAC_ADDRESSES or to_addr in OFAC_ADDRESSES:
+                risk_report["ofac_interaction"] = True
 
             # 检查是否与 Tornado Cash 交互
             if from_addr in TORNADO_CASH_ADDRESSES or to_addr in TORNADO_CASH_ADDRESSES:
@@ -140,6 +146,8 @@ def analyze_risk():
             risk_score += 5
         if risk_report["blacklist_interaction"]:
             risk_score += 4
+        if risk_report["ofac_interaction"]:
+            risk_score += 5
         if risk_report["high_frequency_activity"]:
             risk_score += 2
 
@@ -156,6 +164,7 @@ def analyze_risk():
             "risk_score": risk_score,
             "risk_level": risk_level,
             "risk_report": {
+                "ofac_interaction": risk_report["ofac_interaction"],
                 "blacklist_interaction": risk_report["blacklist_interaction"],
                 "high_frequency_activity": risk_report["high_frequency_activity"],
                 "tornado_cash_involvement": risk_report["tornado_cash_involvement"],

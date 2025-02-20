@@ -43,6 +43,7 @@ document.getElementById("send-button").addEventListener("click", function () {
                 💰 Token: ${token} - Amount: ${amount} <br>
                 📈 Risk Score: ${riskScore} <br>
                 📈 Risk Level: <strong>${riskLevel}</strong> <br>
+                🔄 OFAC Interaction: ${riskReport.ofac_interaction ? "⚠️ Yes" : "✅ No"}<br>
                 🔄 Blacklist Interaction: ${riskReport.blacklist_interaction ? "⚠️ Yes" : "✅ No"}<br>
                 🔥 Tornado Cash Involvement: ${riskReport.tornado_cash_involvement ? "⚠️ Yes" : "✅ No"}<br>
                 ⏳ High Frequency Transactions: ${riskReport.high_frequency_activity ? "⚠️ Yes" : "✅ No"}<br>
