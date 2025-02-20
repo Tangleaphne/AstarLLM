@@ -1,3 +1,4 @@
+// static/js/script.js
 document.getElementById("send-button").addEventListener("click", function () {
     const recipient = document.getElementById("recipient").value.trim();
     const token = document.getElementById("token").value.trim();
