@@ -34,13 +34,14 @@ document.getElementById("send-button").addEventListener("click", function () {
         .then((data) => {
             const riskLevel = data.risk_level;
             const riskReport = data.risk_report;
-
+            const riskScore = data.risk_score;
             const riskMessage = document.createElement("div");
             riskMessage.className = "message ai";
             riskMessage.innerHTML = `
                 📊 <strong>Transaction Risk Analysis:</strong><br>
                 🚀 Recipient: ${recipient} <br>
                 💰 Token: ${token} - Amount: ${amount} <br>
+                📈 Risk Score: ${riskScore} <br>
                 📈 Risk Level: <strong>${riskLevel}</strong> <br>
                 🔄 Blacklist Interaction: ${riskReport.blacklist_interaction ? "⚠️ Yes" : "✅ No"}<br>
                 🔥 Tornado Cash Involvement: ${riskReport.tornado_cash_involvement ? "⚠️ Yes" : "✅ No"}<br>

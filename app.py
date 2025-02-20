@@ -129,7 +129,7 @@ def analyze_risk():
             risk_report["high_frequency_activity"] = True
 
         for ts, count in timestamp_counts.items():  # 方法 2
-            print("The number of tx in certain timestamp is:", count)
+            print(f"The number of tx in {ts} timestamp is:", count)
             if count >= 3:  # 如果某个时间戳的交易数 ≥3
                 risk_report["high_frequency_activity"] = True
                 break  # 发现高频交易即停止
@@ -153,6 +153,7 @@ def analyze_risk():
 
         return jsonify({
             "recipient": recipient,
+            "risk_score": risk_score,
             "risk_level": risk_level,
             "risk_report": {
                 "blacklist_interaction": risk_report["blacklist_interaction"],
