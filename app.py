@@ -29,18 +29,6 @@ MYSQL_USER = os.getenv("MYSQL_USER")
 MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD", "")
 MYSQL_DATABASE = os.getenv("MYSQL_DATABASE")
 
-# # Tornado Cash 地址列表（ETH 混币池）
-# TORNADO_CASH_ADDRESSES = {
-#     "0x1111111254EEB25477B68fb85Ed929f73A960582",  # 1 ETH 池
-#     "0x2222221254EEB25477B68fb85Ed929f73A960582",  # 10 ETH 池
-#     "0x3333331254EEB25477B68fb85Ed929f73A960582",  # 100 ETH 池
-# }
-
-# 已知诈骗 / 黑名单地址（可扩展）
-# BLACKLIST_ADDRESSES = {
-#     "0xdAC17F958D2ee523a2206206994597C13D831ec7",
-#     "0x0000000000000000000000000000000000000E33",
-# }
 # 连接 MySQL 并获取黑名单地址
 def fetch_addresses(listname):
     try:
@@ -127,14 +115,7 @@ def analyze_risk():
             if from_addr in TORNADO_CASH_ADDRESSES or to_addr in TORNADO_CASH_ADDRESSES:
                 risk_report["tornado_cash_involvement"] = True
 
-        # # 检测短时间内大量交易
-        # if len(risk_report["timestamps"]) > 10:
-        #     risk_report["timestamps"].sort()
-        #     time_diffs = [risk_report["timestamps"][i + 1] - risk_report["timestamps"][i] for i in range(len(risk_report["timestamps"]) - 1)]
-        #     avg_time_diff = sum(time_diffs) / len(time_diffs)
-        #     if avg_time_diff < 60:  # 平均时间间隔小于 60 秒
-        #         risk_report["high_frequency_activity"] = True
-        # 获取当前时间
+        # 获取当前时间戳
         current_time = int(time.time())
 
         # 计算过去 5 分钟（300 秒）内的交易数
