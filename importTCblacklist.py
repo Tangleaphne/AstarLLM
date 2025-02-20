@@ -114,7 +114,7 @@ def save_to_db(addresses):
         cursor = conn.cursor()
         for address in addresses:
             try:
-                cursor.execute("INSERT IGNORE INTO tornadocash_blacklist (address) VALUES (%s)", (address,))
+                cursor.execute("INSERT INTO tornadocash_blacklist (address) VALUES (%s) ON DUPLICATE KEY UPDATE address = VALUES(address);", (address,))
             except pymysql.Error as e:
                 print(f"数据库插入失败: {e}")
 

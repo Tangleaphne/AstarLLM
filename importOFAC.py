@@ -29,8 +29,9 @@ cursor = conn.cursor()
 cursor.execute("""
                     CREATE TABLE IF NOT EXISTS ofac_addresses (
                         id INT AUTO_INCREMENT PRIMARY KEY,
-                        address VARCHAR(100) UNIQUE NOT NULL,
-                        currency VARCHAR(10) NOT NULL
+                        address VARCHAR(100) NOT NULL,
+                        currency VARCHAR(10) NOT NULL,
+                        UNIQUE (address, currency)
                     )
                 """)
 
@@ -40,11 +41,17 @@ json_file_path = "ofac.json"
 with open(json_file_path, "r", encoding="utf-8") as file:
     data = json.load(file)
 
+insert_query = """
+INSERT INTO ofac_addresses (address, currency)
+VALUES (%s, %s)
+ON DUPLICATE KEY UPDATE currency = VALUES(currency);
+"""
+
 # 插入数据
 for entry in data:
     currency = entry["Currency"]  # 获取币种
     address = entry["Blockchain Address"]  # 获取地址
-    cursor.execute("INSERT IGNORE INTO ofac_addresses (address, currency) VALUES (%s, %s)", (address, currency))
+    cursor.execute(insert_query, (address, currency))
 
 # 提交更改并关闭连接
 conn.commit()
