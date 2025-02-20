@@ -29,12 +29,12 @@ MYSQL_USER = os.getenv("MYSQL_USER")
 MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD", "")
 MYSQL_DATABASE = os.getenv("MYSQL_DATABASE")
 
-# Tornado Cash 地址列表（ETH 混币池）
-TORNADO_CASH_ADDRESSES = {
-    "0x1111111254EEB25477B68fb85Ed929f73A960582",  # 1 ETH 池
-    "0x2222221254EEB25477B68fb85Ed929f73A960582",  # 10 ETH 池
-    "0x3333331254EEB25477B68fb85Ed929f73A960582",  # 100 ETH 池
-}
+# # Tornado Cash 地址列表（ETH 混币池）
+# TORNADO_CASH_ADDRESSES = {
+#     "0x1111111254EEB25477B68fb85Ed929f73A960582",  # 1 ETH 池
+#     "0x2222221254EEB25477B68fb85Ed929f73A960582",  # 10 ETH 池
+#     "0x3333331254EEB25477B68fb85Ed929f73A960582",  # 100 ETH 池
+# }
 
 # 已知诈骗 / 黑名单地址（可扩展）
 # BLACKLIST_ADDRESSES = {
@@ -42,7 +42,7 @@ TORNADO_CASH_ADDRESSES = {
 #     "0x0000000000000000000000000000000000000E33",
 # }
 # 连接 MySQL 并获取黑名单地址
-def fetch_blacklist_addresses():
+def fetch_addresses(listname):
     try:
         connection = mysql.connector.connect(
             host=MYSQL_HOST,
@@ -51,14 +51,14 @@ def fetch_blacklist_addresses():
             database=MYSQL_DATABASE
         )
         cursor = connection.cursor()
-        cursor.execute("SELECT address FROM blocked_addresses")  # 查询黑名单表
+        cursor.execute(f"SELECT address FROM {listname}")  # 查询黑名单表
         addresses = {row[0].lower() for row in cursor.fetchall()}  # 结果存入 set
         cursor.close()
         connection.close()
-        print(f"✅ Loaded {len(addresses)} blacklisted addresses from MySQL")  # 打印加载成功信息
+        print(f"✅ Loaded {len(addresses)} blacklisted addresses from MySQL `{listname}` Table")  # 打印加载成功信息
         return addresses
-    except Exception as e:
-        print(f"❌ ERROR: Could not load blacklist addresses: {e}")
+    except mysql.connector.Error as e:
+        print(f"❌ ERROR: Could not load blacklist addresses from `{listname}`: {e}")
         return set()  # 如果出错，返回空的 set，避免影响程序
     
 # # **定期刷新黑名单**
@@ -70,8 +70,9 @@ def fetch_blacklist_addresses():
 #         time.sleep(3600)  # 每 1 小时更新一次
 
 # 加载黑名单地址
-BLACKLIST_ADDRESSES = fetch_blacklist_addresses()
-
+BLACKLIST_ADDRESSES = fetch_addresses("blocked_addresses")
+# 加载 Tornado Cash 地址
+TORNADO_CASH_ADDRESSES = fetch_addresses("tornadocash_blacklist")
 # # 在后台启动刷新线程
 # threading.Thread(target=refresh_blacklist, daemon=True).start()
 
