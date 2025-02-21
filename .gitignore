@@ -1,2 +1,5 @@
 /.env
 /audit/*
+/importOFAC.py
+/ofac.json
+/importTCblacklist.py
