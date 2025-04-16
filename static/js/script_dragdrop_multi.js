@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const warningMessage = document.getElementById("warning-message");
     const analyzeButton = document.getElementById("analyze-button");
 
-    let fileText = "";
+    let fileTexts = {}; // 记录每个文件的内容（键为扩展名）
 
     dropZone.addEventListener("dragover", (e) => {
         e.preventDefault();
@@ -20,25 +20,30 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
         dropZone.classList.remove("dragover");
 
-        const file = e.dataTransfer.files[0];
-        if (file) {
+        const files = Array.from(e.dataTransfer.files);
+        fileTexts = {}; // 清空旧内容
+
+        files.forEach(file => {
+            const ext = file.name.split(".").pop().toLowerCase();
             const reader = new FileReader();
             reader.onload = function (event) {
-                fileText = event.target.result;
+                fileTexts[ext] = event.target.result;
 
                 const userMessage = document.createElement("div");
                 userMessage.className = "message user";
-                userMessage.innerText = `📄 File Loaded: ${file.name}`;
+                userMessage.innerText = `📄 Loaded file: ${file.name}`;
                 chatBox.appendChild(userMessage);
                 chatBox.scrollTop = chatBox.scrollHeight;
             };
             reader.readAsText(file);
-        }
+        });
     });
 
     analyzeButton.addEventListener("click", function () {
-        if (!fileText) {
-            warningMessage.innerText = "⚠️ Please drag a .doc or .sol file first.";
+        const combinedText = (fileTexts["doc"] || "") + "\n\n" + (fileTexts["sol"] || "");
+
+        if (!combinedText.trim()) {
+            warningMessage.innerText = "⚠️ Please drag at least one .doc or .sol file.";
             warningMessage.style.display = "block";
             return;
         }
@@ -48,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
         fetch("/analyze_text", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ text: fileText }),
+            body: JSON.stringify({ text: combinedText }),
         })
             .then((response) => response.json())
             .then((data) => {
