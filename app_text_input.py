@@ -21,9 +21,7 @@ def analyze_text():
         return jsonify({"reply": "No text received. Please paste something."}), 400
 
     prompt = (
-        "Below is the frontend description and smart contract code pasted by a user. "
-        "Please analyze whether the frontend promises are consistent with the backend smart contract implementation. "
-        "Point out any security risks, logic mismatches, or dangerous backdoors."
+        "请分析这段代码是否存在常见欺诈行为。"
         f"{full_text}"
     )
 

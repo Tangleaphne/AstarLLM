@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<!-- saved from url=(0021)https://fin-toch.com/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Description" content="A state of the art AI trading bot that uses next generation technical analysis and trading strategies shared by the pro traders to create crypto trades that bring the highest profit.">
+    <meta name="keywords" content="dapp, binance, bnb, smart contract, crypto, Metamask, trustwallet, passive income, trading, bot, roi, profitable, defi, blockchain, decentralized">
+    <title>FinToCh BNB  - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain</title>
+    <!----- bootstrap ---->
+    <link rel="stylesheet" href="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/bootstrap4.5.css">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/all.css">
+    <!-- fonts  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/css2" rel="stylesheet">
+    <!-- slick slider  -->
+    <link rel="stylesheet" href="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/slick.css">
+    <link rel="stylesheet" href="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/slick-theme.css">
+    <!-- custom css -->
+    <link rel="stylesheet" href="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/style.css">
+    <link rel="icon" type="x/icon" href="https://fin-toch.com/assets/favicon.png">
+  </head>
+
+  <body>
+
+    <main>
+      <header class="main-head">
+        <div class="container-1480">
+          <nav>
+            <ul class="menus">
+              <li><a href="https://fin-toch.com/#Dashboard">Dashboard</a></li>
+              <li><a href="https://fin-toch.com/#get-started">Get Started</a></li>
+              <li><a href="https://fin-toch.com/#faq">FAQ</a></li>
+              <!-- <li><a href="Calculator.html">Calculator</a></li> -->
+              <li><a target="_blank" href="https://bscscan.com/address/0x867CEe98A34130148EE7ba87Cf2f609b55eE23ae#code">Contract</a></li>
+              <li class="active sm-none"><a target="_blank" href="https://dappradar.com/">DappRadar</a></li>
+              <li class="active sm-none"><a href="https://fin-toch.com/" id="connect-btn">Connect +</a></li>
+              <li>
+                <a target="_blank" href="https://t.me/FTC_fintoch"><i class="fab fa-telegram-plane"></i></a>
+              </li>
+            </ul>
+          </nav>
+          <div class="icon-bar">
+            <span class="top-line"></span>
+            <span class="center-line"></span>
+            <span class="bottom-line"></span>
+        </div>
+        </div>
+      </header>
+      <!-- header  -->
+      <section class="banner-sec">
+        <div class="container-1480">
+          <div class="banner-content">
+            <img src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/banlogo.png" alt="">
+            <h1>FinToCh BNB</h1>
+            <h2>Powered by binance smart chain</h2>
+            <h2>2% Daily Profit as Lifetime</h2>
+            <h2>30% Referral Rewards for Team Makers</h2>
+            <p>
+              FinToCh uses next gen technical analysis and strategies provided by pro traders to generate highly profits trades. It is an open-source smart contract built on Binance Smart Chain, and offers 5 Level Referral Program.
+            </p>
+            <a href="https://fin-toch.com/#get-started"> <button>How Get Started</button> </a>
+            <a class="desk-none" target="_blank" href="https://fin-toch.com/assets/Litepaper.pdf" id="connect-btn"> <button>Lite Paper</button> </a>
+            <a class="desk-none" href="https://fin-toch.com/"> <button id="connect-btn-mobile">Connect +</button> </a>
+            
+          </div>
+        </div>
+        <img class="ban1" src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/banner-left.png" alt="">
+        <img class="ban2" src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/banner-right.png" alt="">
+        <img class="ban3" src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/banner-rb.png" alt="">
+      </section>
+      <!-- banner  -->
+
+
+        <div class="toast-connected toast my-toast success-toast" data-delay="1000" role="alert" aria-live="assertive" aria-atomic="true">
+         <div class="toast-body">
+          <div class="toast-content success-content">
+            <p>Wallet connected!</p>
+            <span><i class="far fa-check-circle"></i></span>
+          </div>
+        </div>
+      </div>
+      <div class="hidden-messages">
+        <p class="withdraw-suc">Withdrawal successful!</p>
+        <p class="capwithdraw-suc">Capital withdrawn successfully!</p>
+        <p class="deposit-suc">Deposit successful!</p>
+      </div>
+      <!-- toast not connected  -->
+      <div class="toast-insufficient-funds toast my-toast danger-toast" data-delay="3000" role="alert" aria-live="assertive" aria-atomic="true">
+        <!-- <div class="toast-header">
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div> -->
+        <div class="toast-body">
+          <div class="toast-content error-content">
+            <p class="wallet-html">Insufficient funds. Please check your wallet and try again!</p>
+            <span type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><i class="far fa-times-circle"></i></span>
+          </div>
+        </div>
+      </div>
+      <!-- danger msg  -->
+      <div class="hidden-messages">
+        <p class="w-n-c">Please connect your wallet!</p>
+      </div>
+      <!-- danger msg  -->
+      <div class="toast-locked-time toast my-toast " data-delay="1000" role="alert" aria-live="assertive" aria-atomic="true">
+        <!-- <div class="toast-header">
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div> -->
+        <div class="toast-body">
+          <div class="toast-content error-content">
+            <p class="wallet-html"><span id="toast-locktime-content">Please connect your wallet!</span></p>
+            <span class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><i class="far fa-times-circle"></i></span>
+          </div>
+        </div>
+      </div>
+      <div class="toast-unconnected toast my-toast " data-delay="1000" role="alert" aria-live="assertive" aria-atomic="true">
+        <!-- <div class="toast-header">
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div> -->
+        <div class="toast-body">
+          <div class="toast-content error-content">
+            <p class="wallet-html"><span>Please connect your wallet!</span></p>
+            <span class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><i class="far fa-times-circle"></i></span>
+          </div>
+        </div>
+      </div>
+      <!--<div>
+          <p class="withdrawcap-html"> Withdraw available after - x days: x hours: x minutes</p>
+      </div>-->
+      <!-- danger msg  -->
+      <div class="toast-denied toast my-toast " data-delay="2000" role="alert" aria-live="assertive" aria-atomic="true">
+        <!-- <div class="toast-header">
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div> -->
+        <div class="toast-body">
+          <div class="toast-content error-content">
+            <p><span id="toast-locktime-content">Transaction denied!</span></p>
+            <span class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><i class="far fa-times-circle"></i></span>
+          </div>
+        </div>
+      </div>
+      <!--<div>
+          <p class="withdrawcap-html"> Withdraw available after - x days: x hours: x minutes</p>
+      </div>-->
+
+      <section class="sec-2">
+        <div class="container-1480">
+          <div class="invest-wrap">
+            <div class="invest-box">
+              <div class="invest-inner">
+                <img src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/boxicon.png" alt="">
+                <h3>Total Invested</h3>
+                <h2 id="1">16423 BNB</h2>
+                <h4 id="total-invested-usd"></h4>
+              </div>
+            </div>
+            <div class="invest-box invest-box-2 active">
+              <div class="invest-inner">
+                <img src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/boxicon.png" alt="">
+                <h3>Total Investors</h3>
+                <h2 id="total-invested-user">85193</h2>
+              </div>
+            </div>
+            <div class="invest-box">
+              <div class="invest-inner">
+                <img src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/boxicon.png" alt="">
+                <h3>Total Deposits</h3>
+                <h2 id="total-rewards">131427</h2>
+              </div>
+            </div>
+            <!-- <div class="invest-box">
+              <div class="invest-inner">
+                <img src="assets/boxicon.png" alt="" />
+                <h3>Total Withdrawable</h3>
+                <h2 id="total-withdrawable">0 BNB</h2>
+                <h4 id="total-withdrawable-usd">0 USD</h4>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </section>
+      <!-- sec2  -->
+      <section class="sec-3 " id="">
+        <h1 class="sec-head ab">About Us</h1>
+        <div class="container-1480">
+          <div class="row no-gutters align-items-center">
+            <div class="col-lg-7">
+              <div class="sec3-content">
+
+                <p>
+                  FinToCh is a state of the art trading bot dapp to
+                  offer maximum profits on crypto trades. It uses next
+                  generation technical analysis and trading strategies shared by
+                  the pro traders to create trades that bring the highest
+                  profit.
+                </p>
+                <p>
+                  FinToCh bots run day and night seamlessly to ensure
+                  the pool of funds keep growing. The users can deposit/withdraw
+                  capital, generate rewards and create passive income. It is
+                  very simple and easy.
+                </p>
+                <p>
+                  FinToCh offers a solid 2% daily return on your
+                  investment. The users deposit BNB in a pool with bots which
+                  overtime invest the funds in the most profitable trades to get
+                  the most returns.
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="sec3-right">
+                     <video controls="" poster="fin.jpg" width="400" height="225">
+                    <source src="fin.mp4" type="video/mp4">
+                    </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- sec3  -->
+      <section class="dashboard" id="Dashboard">
+        <div class="container-1480">
+          <h1 class="sec-head">Dashboard</h1>
+          <div class="row no-gutters align-items-center justify-content-between dash-row">
+            <div class="col-lg-8">
+              <div class="dash-left">
+                <h1 class="text-body">Deposit :&nbsp;</h1>
+                <div class="form-group">
+                  <input type="number" placeholder="Enter BNB (Min 0.5 BNB)" id="deposit-box" class="form-control">
+                </div>
+                <button id="deposit-btn" class="deposit">Deposit</button>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="dash-right">
+                <!-- <button>Deposit</button> -->
+                <button id="withdraw-rewards-btn">Withdraw Referral</button>
+                <button id="withdraw-capital-btn"><span>Withdraw Daily</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- dashboard  -->
+      <section class="transactionsSec">
+        <div class="container-1480">
+            <div class="head-table">
+                </div><div class="tbodyMaindiv">
+              </div><table class="display transaction-table" style="width: 100%">
+            <thead>
+              <tr class="table-head">
+                  <th><span></span> Deposit ID</th>
+                  <th><span></span> Deposit Date</th>
+                  <th><span></span> Deposit Amount</th>
+                  <th><span></span> Remaining Time for Next Withdraw</th>
+              <!--    <th><span></span> Capital Release</th>   -->
+                </tr> 
+                
+            </thead>
+
+            <tbody id="rows-container">
+                <!-- <tr>
+                    <td>
+                      <div class="buyImg">
+                        <img src="./assets/ic_buy.png" alt="buy" />
+                      </div>
+                    </td>
+                    <td>#12415346563475</td>
+                    <td>06:24:45 AM</td>
+                    <td>$5,553</td>
+                    <td>+$5,553</td>
+                    <td>x days</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="buyImg">
+                        <img src="./assets/ic_sell.png" alt="sell" />
+                      </div>
+                    </td>
+                    <td>#12415346563475</td>
+                    <td>06:24:45 AM</td>
+                    <td>-$542</td>
+                    <td>-$542</td>
+                    <td>$5,5431446</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="buyImg">
+                        <img src="./assets/ic_sell.png" alt="sell" />
+                      </div>
+                    </td>
+                    <td>#12415346563475</td>
+                    <td>06:24:45 AM</td>
+                    <td>-$912</td>
+                    <td>-$912</td>
+                    <td>$5,5514564</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="buyImg">
+                        <img src="./assets/ic_buy.png" alt="buy" />
+                      </div>
+                    </td>
+                    <td>#12415346563475</td>
+                    <td>06:24:45 AM</td>
+                    <td>+$7,762</td>
+                    <td>+$7,762</td>
+                    <td>$7,6547441</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="buyImg">
+                        <img src="./assets/ic_buy.png" alt="buy" />
+                      </div>
+                    </td>
+                    <td>#12415346563475</td>
+                    <td>06:24:45 AM</td>
+                    <td>+$5,553</td>
+                    <td>+$5,553</td>
+                    <td>$7,4743</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="buyImg">
+                        <img src="./assets/ic_sell.png" alt="sell" />
+                      </div>
+                    </td>
+                    <td>#12415346563475</td>
+                    <td>06:24:45 AM</td>
+                    <td>-$912</td>
+                    <td>-$912</td>
+                    <td>$10,4743</td>
+                  </tr> -->
+              </tbody>
+            
+            </table>
+        </div>
+      </section>
+
+      <section class="referal-reward">
+        <div class="container-1480">
+          <h1 class="sec-head mb-5">Your Status</h1>
+          <div class="row">
+          <div class="total-referal col-lg-4 col-sm-12">
+            <h1>Total referral</h1>
+            <h2><span id="total-referal-reward">0</span> BNB</h2>
+          </div>
+          <div class="total-referal col-lg-4 col-sm-12">
+            <h1>Available referral</h1>
+            <h2><span id="total-referal-available">0</span> BNB</h2>
+          </div>
+          <div class="total-referal col-lg-4 col-sm-12">
+            <h1>Withdrawn referral</h1>
+            <h2><span id="total-referal-withdrawn">0</span> BNB</h2>
+          </div>
+          <div class="total-referal col-lg-4 col-sm-12">
+            <h1>Total deposit</h1>
+            <h2><span id="total-user-deposit">0</span> BNB</h2>
+          </div>
+         <!--< <div class="total-referal col-lg-4 col-sm-12">
+            <h1>Reinvest bonus</h1>
+            <h2><span id="user-reinvest-bonus">0</span> BNB</h2>
+          </div>
+          
+          <div class="total-referal col-lg-4 col-sm-12">
+            <h1>Total invested</h1>
+            <h2><span id="user-total-invested">0</span> BNB</h2>
+          </div>
+          -->
+          
+          <div class="total-referal col-lg-4 col-sm-12">
+            <h1>Total profit</h1>
+            <h2><span id="total-profit">0</span> BNB</h2>
+          </div>
+          <!--<
+          <div class="total-referal col-lg-4 col-sm-12">
+            <h1>Daily profit</h1>
+            <h2><span id="daily-profit">0</span> BNB</h2>
+          </div>
+          -->
+          <div class="total-referal col-lg-4 col-sm-12">
+            <h1>Withdrawn daily</h1>
+            <h2><span id="withdrawn-daily">0</span> BNB</h2>
+          </div>
+          
+          
+          
+          
+        </div>
+          <div class="withdraw"> </div>
+          <p class="referal-link">Your Referral Link: </p><p id="ref-link">You will get your Referral Link after investing</p> <img src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/copy.png" alt="" id="copy"><p></p>
+          <p class="referal-text">Once you have made a deposit to FinToCh, you will notice your custom referral address appear right here. When a new user makes a deposit after clicking your personal referral link, You can receive referral rewards up to 30%, which will get added to your deposited capital, building you a stream of income. </p>
+          <div class="lvl-box-wrapper">
+            <div class="lvl-box">
+              <h2>1 LVL</h2>
+              <h3><span id="referralsCountAtLevel1">0</span> Referrals</h3>
+              <h4>20% Referral Rewards</h4>
+            </div>
+            <div class="lvl-box">
+              <h2>2 LVL</h2>
+              <h3><span id="referralsCountAtLevel2">0</span> Referrals</h3>
+              <h4>5% Referral Rewards</h4>
+            </div>
+            <div class="lvl-box">
+              <h2>3 LVL</h2>
+              <h3><span id="referralsCountAtLevel3">0</span> Referrals</h3>
+              <h4>3% Referral Rewards</h4>
+            </div>
+            <div class="lvl-box">
+              <h2>4 LVL</h2>
+              <h3><span id="referralsCountAtLevel4">0</span> Referrals</h3>
+              <h4>1% Referral Rewards</h4>
+            </div>
+            <div class="lvl-box">
+              <h2>5 LVL</h2>
+              <h3><span id="referralsCountAtLevel5">0</span> Referrals</h3>
+              <h4>1% Referral Rewards</h4>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- LATEST DEPOSITS SECTIOIN  -->
+      <section class="latestDepositsSec">
+        <div class="container-1480">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="secHeading">
+                <h2>Latest Deposits</h2>
+              </div>
+            </div>
+          </div>
+          <div class="row no-gutters">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Investors</th>
+                  <th scope="col">Amount in BNB</th>
+                </tr>
+              </thead>
+              <tbody id="latest-deposits">
+                <!--<tr>
+                    <td>0x04F46CDfE8DD348E41902eEF1aFF19AcE1661F4c</td>
+                    <td>1065.06 BNB</td>
+                  </tr>
+                  <tr>
+                    <td>0x61B55Ec96A2EaC0c006889Da93e38AAfDe09718f</td>
+                    <td>1065.06 BNB</td>
+                  </tr>
+                  <tr>
+                    <td>0x61B55Ec96A2EaC0c006889Da93e38AAfDe09718f</td>
+                    <td>1065.06 BNB</td>
+                  </tr>
+                  <tr>
+                    <td>0x61B55Ec96A2EaC0c006889Da93e38AAfDe09718f</td>
+                    <td>1065.06 BNB</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>-->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- HOW IT WORKS SECTION -->
+
+      <section class="howItWorks " id="get-started">
+        <img src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/stepsLeft.png" alt="" class="botImgSteps">
+        <img src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/stepsRight.png" alt="" class="topImgSteps">
+        <div class="container-1480">
+          <div class="row no-gutters">
+            <div class="col-lg-12">
+              <div class="secHeading">
+                <h2>Get Started</h2>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-5">
+              <div class="steps step1">
+                <div class="stepContent">
+                  <div class="headStep">
+                    <h3>1</h3>
+                    <h2>Create a Wallet</h2>
+                  </div>
+
+                  <p>
+                    Download Metamask or Trustwallet and create a wallet. add the Binance Smart Chain to your
+                    network-list.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-5">
+              <div class="steps step2">
+                <div class="stepContent">
+                  <div class="headStep">
+                    <h3>2</h3>
+                    <h2>Get BNB</h2>
+                  </div>
+
+                  <p>
+                    Buy BNB on an exchange (i.e. BSC). Transfer BNB to
+                    your wallet address. BNB addresses start with a “0x".
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-5">
+              <div class="steps step3">
+                <div class="stepContent">
+                  <div class="headStep">
+                    <h3>3</h3>
+                    <h2>Connect Your Wallet</h2>
+                  </div>
+
+                  <p>
+                    At the top of the site, click "Connect Wallet", confirm the
+                    action, after which you should see the numbers of your
+                    wallet.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-5">
+              <div class="steps step2">
+                <div class="stepContent">
+                  <div class="headStep">
+                    <h3>4</h3>
+                    <h2>Make A Deposit</h2>
+                  </div>
+
+                  <p>
+                    On the dashboard, click on the "Deposit" button. In the
+                    window that opens, enter the amount, click again on the
+                    "Deposit" button and confirm the action.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-5">
+              <div class="steps step3">
+                <div class="stepContent">
+                  <div class="headStep">
+                    <h3>5</h3>
+                    <h2>Get Dividends!</h2>
+                  </div>
+
+                  <p>
+                    You have successfully created a deposit! Now every minute
+                    you will receive dividends that you can withdraw once a day
+                    by clicking on the "Withdraw daily" button.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-5"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- transaction sec  --> 
+      <section class="faqs" id="faq">
+        <div class="container-1480">
+          <h1 class="sec-head">FAQ</h1>
+          <div class="row no-gutters">
+            <div class="col-lg-6">
+              <div id="accordion">
+                <div class="faq-box">
+                  <div class="faq-head row" data-toggle="collapse" data-target="#collapse1" aria-expanded="true">
+                    <div class="col-lg-12 col-md-12 col-sm-12 faq-us">
+                      <h1>
+                        <span class="minus"><svg class="svg-inline--fa fa-plus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                            <path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                            </path>
+                          </svg><!-- <i class="fas fa-plus"></i> Font Awesome fontawesome.com -->
+                          <svg class="svg-inline--fa fa-minus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="minus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                            <path fill="currentColor" d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                            </path>
+                          </svg><!-- <i class="fas fa-minus"></i> Font Awesome fontawesome.com --></span>What is the
+                        minimum amount of BNB I can deposit ?
+                      </h1>
+                    </div>
+                  </div>
+                  <div id="collapse1" class="faq-content collapse show" data-parent="#accordion" style="">
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12 padd-ri">
+                        <p>
+                          Minimum deposit is 0.5 bnb. You can make a deposit of more than 0.5 BNB to
+                          begin with. And don’t worry, You can make as many
+                          deposits as you please.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="faq-box">
+                  <div class="faq-head row" data-toggle="collapse" data-target="#collapse2" aria-expanded="false">
+                    <div class="col-lg-12 col-md-12 col-sm-12 faq-us">
+                      <h1>
+                        <span class="minus"><svg class="svg-inline--fa fa-plus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                            <path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                            </path>
+                          </svg><!-- <i class="fas fa-plus"></i> Font Awesome fontawesome.com -->
+                          <svg class="svg-inline--fa fa-minus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="minus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                            <path fill="currentColor" d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                            </path>
+                          </svg><!-- <i class="fas fa-minus"></i> Font Awesome fontawesome.com -->
+                          </span>Is FinToCh safe?:
+                      </h1>
+                    </div>
+                  </div>
+                  <div id="collapse2" class="faq-content collapse" data-parent="#accordion" style="">
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12 padd-ri">
+                        <p>
+                          Yes, FinToCh has a safe and verified smart contract on BSC network with no backdoor, no one can change it. it has been developed by powerful team
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="faq-box">
+                  <div class="faq-head row" data-toggle="collapse" data-target="#collapse3" aria-expanded="false">
+                    <div class="col-lg-12 col-md-12 col-sm-12 faq-us">
+                      <h1>
+                        <span class="minus"><svg class="svg-inline--fa fa-plus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                            <path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                            </path>
+                          </svg><!-- <i class="fas fa-plus"></i> Font Awesome fontawesome.com -->
+                          <svg class="svg-inline--fa fa-minus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="minus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                            <path fill="currentColor" d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                            </path>
+                          </svg><!-- <i class="fas fa-minus"></i> Font Awesome fontawesome.com --></span> How much am I
+                        paying in fees?
+                      </h1>
+                    </div>
+                  </div>
+                  <div id="collapse3" class="faq-content collapse" data-parent="#accordion" style="">
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12 padd-ri">
+                        <p>
+                          There is 5% dev fee taken upon ALL deposits and withdraw from FinToCh. The only fee that users personally incur is their transaction gas fees, which is charged by the BSC network.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="faq-box">
+                  <div class="faq-head row" data-toggle="collapse" data-target="#collapse4" aria-expanded="false">
+                    <div class="col-lg-12 col-md-12 col-sm-12 faq-us">
+                      <h1>
+                        <span class="minus"><svg class="svg-inline--fa fa-plus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                            <path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                            </path>
+                          </svg><!-- <i class="fas fa-plus"></i> Font Awesome fontawesome.com -->
+                          <svg class="svg-inline--fa fa-minus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="minus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                            <path fill="currentColor" d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                            </path>
+                          </svg><!-- <i class="fas fa-minus"></i> Font Awesome fontawesome.com --></span>Can I make
+                        multiple deposits?
+                      </h1>
+                    </div>
+                  </div>
+                  <div id="collapse4" class="faq-content collapse" data-parent="#accordion" style="">
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12 padd-ri">
+                        <p>
+                          Yes. You can make as many number of deposits as you like. We encourage that as increases your
+                          returns accordingly.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div id="accordion-2">
+
+
+                <div class="faq-box">
+                  <div class="faq-head row" data-toggle="collapse" data-target="#collapse6" aria-expanded="false">
+                    <div class="col-lg-12 col-md-12 col-sm-12 faq-us">
+                      <h1>
+                        <span class="minus"><svg class="svg-inline--fa fa-plus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                            <path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                            </path>
+                          </svg><!-- <i class="fas fa-plus"></i> Font Awesome fontawesome.com -->
+                          <svg class="svg-inline--fa fa-minus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="minus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                            <path fill="currentColor" d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                            </path>
+                          </svg><!-- <i class="fas fa-minus"></i> Font Awesome fontawesome.com --></span>Can I make daily
+                        withdrawals?
+                      </h1>
+                    </div>
+                  </div>
+                  <div id="collapse6" class="faq-content collapse" data-parent="#accordion-2" style="">
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12 padd-ri">
+                        <p>
+                          The amount of daily profit is 2% per day and its forever as lifetime, which must be withdrawn every 24 hours. 
+The daily profit is calculated based on the sum of your total deposit and your reinvestment bonus, 
+and it must be withdrawn every day and is not transferred to the next day. Your next withdrawal time is 24 hour after the previous harvest
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="faq-box">
+                  <div class="faq-head row" data-toggle="collapse" data-target="#collapse7" aria-expanded="false">
+                    <div class="col-lg-12 col-md-12 col-sm-12 faq-us">
+                      <h1>
+                        <span class="minus"><svg class="svg-inline--fa fa-plus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                            <path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                            </path>
+                          </svg><!-- <i class="fas fa-plus"></i> Font Awesome fontawesome.com -->
+                          <svg class="svg-inline--fa fa-minus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="minus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                            <path fill="currentColor" d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                            </path>
+                          </svg><!-- <i class="fas fa-minus"></i> Font Awesome fontawesome.com --></span>referral rewards
+                      </h1>
+                    </div>
+                  </div>
+                  <div id="collapse7" class="faq-content collapse" data-parent="#accordion-2" style="">
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12 padd-ri">
+                        <p>
+                          Anyone can receive referral rewards up to 10 times of their total deposit,
+if amount of your referral rewards exceeds 10 times of your total deposit, you cannot withdraw unless you increase your deposit.
+
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="faq-box">
+                  <div class="faq-head row" data-toggle="collapse" data-target="#collapse8" aria-expanded="false">
+                    <div class="col-lg-12 col-md-12 col-sm-12 faq-us">
+                      <h1>
+                        <span class="minus"><svg class="svg-inline--fa fa-plus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                            <path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                            </path>
+                          </svg><!-- <i class="fas fa-plus"></i> Font Awesome fontawesome.com -->
+                          <svg class="svg-inline--fa fa-minus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="minus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                            <path fill="currentColor" d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                            </path>
+                          </svg><!-- <i class="fas fa-minus"></i> Font Awesome fontawesome.com --></span> What is 5 Level Referral Program?
+                      </h1>
+                    </div>
+
+                  </div>
+                  <div id="collapse8" class="faq-content collapse" data-parent="#accordion-2" style="">
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12 padd-ri">
+                        <p>
+                          Connect your wallet and complete a deposit to FinToCh. Once the transaction is processed, you will get a custom link at ‘Your Referral Link:’. Copy it and share with your friends or fellow crypto enthusiasts. There are 5 levels of referral rewards, if someone invests with your referral link, you will get 30% bonus, total up to 30% bonus paid in 5 levels(20% , 5% , 3% , 1% , 1%)
+
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="faq-box">
+                  <div class="faq-head row" data-toggle="collapse" data-target="#collapse9" aria-expanded="false">
+                    <div class="col-lg-12 col-md-12 col-sm-12 faq-us">
+                      <h1>
+                        <span class="minus"><svg class="svg-inline--fa fa-plus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                            <path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                            </path>
+                          </svg><!-- <i class="fas fa-plus"></i> Font Awesome fontawesome.com -->
+                          <svg class="svg-inline--fa fa-minus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="minus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                            <path fill="currentColor" d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                            </path>
+                          </svg><!-- <i class="fas fa-minus"></i> Font Awesome fontawesome.com --></span> How to use FinToCh on my phone?
+                      </h1>
+                    </div>
+
+                  </div>
+                  <div id="collapse9" class="faq-content collapse" data-parent="#accordion-2" style="">
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12 padd-ri">
+                        <p>
+                          Simply use any browser that you want and choose Metamask or Trustwallet to connect to your wallet's app on your phone
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- faqs  -->
+      <section class="media-sec">
+        <div class="container-1480">
+          <h1 class="sec-head text-uppercase">Media</h1>
+          <div class="media-wrap">
+            <div class="media-logo">
+              <a href="https://fin-toch.com/#"><img src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/CoinSpeaker.png" alt=""></a>
+            </div>
+            <div class="media-logo">
+              <a href="https://fin-toch.com/#"><img src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/BeinCrypto.png" alt=""></a>
+            </div>
+            <div class="media-logo">
+              <a href="https://coingape.com/" target="_blank"><img src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/CoinGap.png" alt=""></a>
+            </div>
+            <div class="media-logo">
+              <a target="_blank" href="https://www.newsbtc.com/"><img src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/NewsBTC.png" alt=""></a>
+            </div>
+            <div class="media-logo">
+              <a target="_blank" href="https://www.livebitcoinnews.com/"><img class="big-img" src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/LiveBitcoinNews.png" alt=""></a>
+            </div>
+            <div class="media-logo">
+              <a href="https://fin-toch.com/#"><img src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/Nulltix1.png" alt=""></a>
+            </div>
+            <div class="media-logo">
+              <a href="https://usethebitcoin.com/" target="_blank"><img src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/UTB1.png" alt=""></a>
+            </div>
+            <div class="media-logo">
+              <a target="_blank" href="https://bitcoinist.com/"><img src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/Bitcoinist.png" alt=""></a>
+            </div>
+            <div class="media-logo">
+              <a href="https://u.today/" target="_blank"><img src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/UToday1.png" alt=""></a>
+            </div>
+            <div class="media-logo ">
+              <a href="https://coinquora.com/" target="_blank"><img src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/coinquora.png" alt=""></a>
+            </div>
+            <div class="media-logo ">
+              <a href="https://thebitcoinnews.com/" target="_blank"><img src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/thebitcoinnews.png" alt=""></a>
+            </div>
+            <div class="media-logo ">
+              <a href="https://crypto.news/" target="_blank"><img src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/cryptonews.png" alt=""></a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer class="main-footer">
+        <div class="container-1480">
+          <div class="foot-content">
+            <a href="https://fin-toch.com/index.html"><img src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/banlogo.png" alt=""></a>
+            <a target="_blank" href="https://dappradar.com/"><img class="foot-logo2" src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/community-logo.png" alt=""></a>
+            <div class="foot-btn">
+              <a target="_blank" href="https://bscscan.com/address/0x04F46CDfE8DD348E41902eEF1aFF19AcE1661F4c#code"> <button>Contract1</button></a>
+              <a href="https://fin-toch.com/#faq"><button>FAQ</button></a>
+              <a target="_blank" href="https://bscscan.com/address/0x97B81722E3123CDb74a9d1f95DE0F0CAa9696cd0#code"><button>Contract2</button></a>
+              <a target="_blank" href="https://t.me/FTC_fintoch"><button>Telegram</button></a>
+            </div>
+            <p>Copyright © 2023 FinToCh - All Rights Reserved</p>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+
+    <!-- jquery -->
+    <script src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/jquery-3.6.0.min.js.下载"></script>
+    <!-- bootstrap -->
+    <script src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/bootstrap.min.js.下载"></script>
+    <script src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/popper.min.js.下载"></script>
+  <script src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/bootstrap.bundle.min.js.下载"></script>
+    <!-- slick slider  -->
+    <script src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/slick.js.下载"></script>
+    <!-- custom js -->
+    <script src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/custom.js.下载"></script>
+    <script type="text/javascript" src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/index.min.js.下载"></script>
+    <script type="text/javascript" src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/index.js.下载"></script>
+    <script type="text/javascript" src="./FinToCh BNB - An AI Trading Bot Dapp to offer maximum profits, built on Binance Smart Chain_files/ethers.umd.js.下载"></script></body></html>

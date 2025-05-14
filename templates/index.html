@@ -5,37 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DApp Consistency Checker</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <style>
-        .drop-zone {
-            border: 2px dashed #999;
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            color: #555;
-            margin-bottom: 20px;
-            cursor: pointer;
-        }
-
-        .drop-zone.dragover {
-            background-color: #f0f8ff;
-        }
-    </style>
 </head>
 <body>
-    <div class="container">
-        <div id="chat-box" class="chat-box">
-            <!-- Message display area -->
-        </div>
+    <div class="container" id="drop-zone">
+        <div id="chat-box" class="chat-box"></div>
         <div id="warning-message" class="warning" style="display: none;"></div>
-
-        <!-- 文件拖拽区 -->
-        <div id="drop-zone" class="drop-zone">
-            📎 Drag and drop your .doc or .sol file here for analysis
+        <textarea id="text-input" placeholder="Paste your frontend description or comments here..."></textarea>
+        <div class="drop-tip">
+            📎 Drag and drop your .doc or .sol file <b>anywhere on this page</b> for analysis
         </div>
-
         <button id="analyze-button">Analyze with AI</button>
     </div>
-
-    <script src="{{ url_for('static', filename='js/script_dragdrop_multi.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script_final.js') }}"></script>
 </body>
 </html>
