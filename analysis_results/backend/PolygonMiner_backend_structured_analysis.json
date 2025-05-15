@@ -1,0 +1,11 @@
+{
+    "fixed_reward": "Yes",
+    "reward_rate": "1 miner per 30 days (equivalent to 3.33% per day)",
+    "has_fee": "Yes",
+    "fee_rate": "5%",
+    "token_supply_fixed": "Yes",
+    "liquidity_lock_time": "Not specified in the provided code",
+    "owner_can_withdraw_funds": "Yes",
+    "can_pause_dapp": "Yes",
+    "NFT_metadata_on_IPFS": "Yes"
+}

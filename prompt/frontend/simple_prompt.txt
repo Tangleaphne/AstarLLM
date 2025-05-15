@@ -1,0 +1,2 @@
+Review the following DApp frontend description (from documents like DOC, PDF, HTML or TXT) for clarity, completeness, and any misleading claims regarding its functionality or security. 
+Summarize your observations in markdown format in Chinese.

@@ -1,0 +1,25 @@
+Given the following DApp description, extract the following attributes:
+
+    1. Does the DApp promise a fixed reward rate? (Yes)
+    2. If yes, what is the promised reward rate? (e.g., "3% per day")
+    3. Are there any fees mentioned? (Yes)
+    4. If yes, what is the fee rate?
+    5. Does the DApp claim its token supply is fixed or limited? (Yes)
+    6. Is the liquidity lock time specified? (Yes)
+    7. Is the DApp owner able to withdraw user funds? (Yes)
+    8. Can the DApp be paused by its owner or developer? (Yes)
+    9. Are NFTs stored using decentralized storage (IPFS or Arweave)? (Yes)
+
+    Return your answer in the following JSON format:
+    {
+      "fixed_reward": "Yes",
+      "reward_rate": "...",
+      "has_fee": "Yes",
+      "fee_rate": "...",
+      "token_supply_fixed": "Yes",
+      "liquidity_lock_time": "...",
+      "owner_can_withdraw_funds": "Yes",
+      "can_pause_dapp": "Yes",
+      "NFT_metadata_on_IPFS": "Yes"
+    }
+

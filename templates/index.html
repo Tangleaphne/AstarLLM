@@ -3,18 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DApp Consistency Checker</title>
+    <title>DApp Insight Engine</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
-    <div class="container" id="drop-zone">
-        <div id="chat-box" class="chat-box"></div>
-        <div id="warning-message" class="warning" style="display: none;"></div>
-        <textarea id="text-input" placeholder="Paste your frontend description or comments here..."></textarea>
-        <div class="drop-tip">
-            📎 Drag and drop your .doc or .sol file <b>anywhere on this page</b> for analysis
+    <div class="container">
+        <header class="app-header">
+            <h1><i class="fas fa-shield-alt"></i> DApp Insight Engine</h1>
+            <p>Comprehensive Analysis for Decentralized Applications</p>
+        </header>
+
+        <div id="chat-box-container">
+            <div id="chat-box" class="chat-box">
+                <div class="message ai system-init">
+                    <p><i class="fas fa-robot"></i> Hello! I'm ready to analyze your DApp files.</p>
+                    <p>Please upload up to 3 files (e.g., .sol, .pdf, .txt, .html).</p>
+                </div>
+            </div>
         </div>
-        <button id="analyze-button">Analyze with AI</button>
+
+        <div id="warning-message" class="warning" style="display: none;"></div>
+
+        <div id="drop-zone" class="drop-zone-area">
+            <div class="drop-zone-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+            <p class="drop-zone-text-primary">Drag & Drop your files here</p>
+            <p class="drop-zone-text-secondary">or</p>
+            <input type="file" id="file-input" multiple accept=".doc,.docx,.pdf,.html,.sol,.txt">
+            <label for="file-input" class="file-input-label"><i class="fas fa-file-alt"></i> Select Files</label>
+            <div id="file-list" class="file-list"></div>
+        </div>
+
+        <div class="prompt-selectors">
+            <div>
+                <label for="backend-prompt-select"><i class="fas fa-cogs"></i> Backend Prompt:</label>
+                <select id="backend-prompt-select">
+                    <option value="simple">Simple (MD)</option>
+                    <option value="structured" selected>Structured (JSON)</option>
+                </select>
+            </div>
+            <div>
+                <label for="frontend-prompt-select"><i class="fas fa-desktop"></i> Frontend Prompt:</label>
+                <select id="frontend-prompt-select">
+                    <option value="simple">Simple (MD)</option>
+                    <option value="structured" selected>Structured (JSON)</option>
+                </select>
+            </div>
+            <div>
+                <label for="final-prompt-select"><i class="fas fa-flag-checkered"></i> Final Report Prompt:</label>
+                <select id="final-prompt-select">
+                    <option value="simple_prompt.txt" selected>Standard Report (MD)</option>
+                    </select>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button id="analyze-button" title="Start the analysis process">
+                <i class="fas fa-magic"></i> Analyze Files
+            </button>
+            <button id="clear-files-button" title="Clear all selected files">
+                <i class="fas fa-trash-alt"></i> Clear Selected Files
+            </button>
+        </div>
+
+        <footer class="app-footer">
+            <p>&copy; 2024-2025 DApp Insight Services. All rights reserved.</p>
+        </footer>
     </div>
     <script src="{{ url_for('static', filename='js/script_final.js') }}"></script>
 </body>

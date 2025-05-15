@@ -1,0 +1,14 @@
+{
+    "fixed_reward": "Yes",
+    "reward_rate": "Up to 8 Daily Returns",
+    "has_fee": "Yes",
+    "fee_rate": {
+        "dev_fee": "3%",
+        "marketing_fee": "2%"
+    },
+    "token_supply_fixed": "Yes",
+    "liquidity_lock_time": "Not specified",
+    "owner_can_withdraw_funds": "Yes",
+    "can_pause_dapp": "Yes",
+    "NFT_metadata_on_IPFS": "Yes"
+}

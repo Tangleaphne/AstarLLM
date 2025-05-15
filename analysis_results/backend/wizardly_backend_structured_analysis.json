@@ -1,0 +1,11 @@
+{
+    "fixed_reward": "Yes",
+    "reward_rate": "1 rune per second per miner",
+    "has_fee": "Yes",
+    "fee_rate": "3.25% development fee and 1.75% marketing fee",
+    "token_supply_fixed": "Yes",
+    "liquidity_lock_time": "Not explicitly specified",
+    "owner_can_withdraw_funds": "Yes",
+    "can_pause_dapp": "Yes",
+    "NFT_metadata_on_IPFS": "Yes"
+}

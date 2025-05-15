@@ -1,0 +1,6 @@
+You are provided with two sets of analyses: one for the backend (smart contracts) and one for the frontend (descriptive documents) of a DApp.
+Compare these analyses. Identify any inconsistencies, discrepancies, or areas where the frontend description does not match the likely behavior or security posture suggested by the backend analysis.
+Provide a consolidated final report highlighting these inconsistencies and give an overall risk assessment.
+In Chinese.
+
+[You will receive the combined text of backend and frontend analyses below this line.]
